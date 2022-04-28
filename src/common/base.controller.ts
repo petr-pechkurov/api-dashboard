@@ -2,20 +2,16 @@ import { Response, Router } from 'express';
 import IControllerRoute from './route.interface';
 import LoggerService from '../logger/logger.service';
 
-export default class BaseController {
-  private readonly _router: Router;
+export default abstract class BaseController {
+  public readonly router: Router;
 
   constructor(private logger: LoggerService) {
-    this._router = Router();
-  }
-
-  get router() {
-    return this._router;
+    this.router = Router();
   }
 
   public send<T>(res: Response, code: number, message: T) {
     res.type('application/json');
-    return res.sendStatus(200).json(message);
+    return res.status(code).json(message);
   }
 
   public ok<T>(res: Response, message: T) {
