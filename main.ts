@@ -5,7 +5,7 @@ import UserController from './src/users/users.controller';
 async function bootstrap() {
   const logger = new LoggerService();
   const app = new App(logger, new UserController(logger));
-  app.init();
+  await app.init();
 }
 
 bootstrap();
