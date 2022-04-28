@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import BaseController from '../common/base.controller';
 import LoggerService from '../logger/logger.service';
 
@@ -16,6 +16,6 @@ export default class UserController extends BaseController {
   }
 
   register(req: Request, res: Response, next: NextFunction) {
-    this.ok(res, 'register');
+    this.ok(res, { message: 'register' });
   }
 }
