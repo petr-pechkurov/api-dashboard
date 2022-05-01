@@ -34,6 +34,12 @@ export default class UserController extends BaseController implements IUserContr
 				func: this.register,
 				middlewares: [new ValidateMiddleware(UserRegisterDto)],
 			},
+			{
+				path: '/info',
+				method: 'get',
+				func: this.info,
+				middlewares: [],
+			},
 		]);
 	}
 
@@ -61,6 +67,10 @@ export default class UserController extends BaseController implements IUserContr
 			return next(new HTTPError(422, 'This user is already exists'));
 		}
 		this.ok(res, { email: result.email, id: result.id });
+	}
+
+	async info({ user }: Request, res: Response, next: NextFunction): Promise<void> {
+		this.ok(res, { email: user });
 	}
 
 	private signJWT(email: string, secret: string): Promise<string> {
