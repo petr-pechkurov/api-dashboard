@@ -26,4 +26,13 @@ export default class UsersRepository implements IUsersRepository {
 			},
 		});
 	}
+
+	async checkLogin(email: string, password: string): Promise<UserModel | null> {
+		return this.prismaService.client.userModel.findFirst({
+			where: {
+				email,
+				password,
+			},
+		});
+	}
 }
