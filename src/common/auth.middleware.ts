@@ -12,7 +12,7 @@ export class AuthMiddleware implements IMiddleware {
 					next();
 				}
 				const data = payload as JwtPayload;
-				req.user = data.email;
+				req.user = data?.email;
 				next();
 			});
 		} else {
