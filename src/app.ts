@@ -25,7 +25,7 @@ export default class App {
 		@inject(TYPES.PrismaService) private prismaService: PrismaService,
 	) {
 		this.app = express();
-		this.port = 8000;
+		this.port = 8001;
 	}
 
 	useMiddleware(): void {
@@ -49,5 +49,9 @@ export default class App {
 		await this.prismaService.connect();
 		this.server = this.app.listen(this.port);
 		this.logger.log(`Server started at http://localhost:${this.port}`);
+	}
+
+	public close(): void {
+		this.server.close();
 	}
 }
